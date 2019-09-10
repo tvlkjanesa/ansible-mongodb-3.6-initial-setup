@@ -1,0 +1,42 @@
+---
+# required variables:
+# service_name: <name of the service>, this will be used as replica set name
+# mongodb_repl_oplog_size: <size of the mongo oplog in MB>
+# pd_name: your product domain name
+# hostname: FQDN of mongodb instances
+# temporary_master_password: temporary master password for initial root user
+# keyfile: keyfile for mongodb cluster, to generate key file you can run this command: openssl rand -base64 741
+
+- hosts: localhost
+  connection: local
+  vars:
+    tvlk_mongod_initialization: true
+    keyfile: "{{ lookup('file','/tmp/keyfile')}}"
+      
+  pre_tasks:
+    - block:
+      - name: set instance hostname
+        hostname:
+          name: "{{ hostname }}"
+      become: yes
+      become_method: sudo
+      when: keyfile and temporary_master_password != ""
+  roles:
+    - role: xfsvolume
+      xfs_volume_mount: /var/lib/mongodb
+    - role: mongod-3.6
+      mongodb_authorization_enabled: false
+      when: tvlk_mongod_initialization == true
+    - role: awslogs-config
+      awslogs_app_name: "{{service_name}}-mongod"
+      awslogs_app_log_settings:
+        - file: "/var/log/mongodb/mongod.log"
+          datetime_format: "%Y-%m-%dT%H:%M:%S.%f%z"
+          group_name: "/tvlk/mongod/{{ service_name }}/mongod.log"
+          time_zone: "UTC"
+    - role: mongo-root-user
+      login_password: "{{ temporary_master_password }}"
+    - role: mongod-3.6
+      mongodb_repl_set_name: "{{ service_name }}"
+      mongodb_keyfile_content: "{{ keyfile }}"
+      when: tvlk_mongod_initialization == true

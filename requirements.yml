@@ -1,0 +1,9 @@
+- src: https://github.com/traveloka/ansible-mongod-3.6
+  name: mongod-3.6
+- src: https://github.com/traveloka/ansible-xfsvolume
+  name: xfsvolume
+- src: https://github.com/traveloka/ansible-awslogs-config
+  name: awslogs-config
+- src: https://github.com/SiahaanBernard/ansible-mongo-root-user
+  name: mongo-root-user
+
