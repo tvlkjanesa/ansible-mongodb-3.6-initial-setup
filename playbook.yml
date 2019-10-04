@@ -12,12 +12,12 @@
   vars:
     tvlk_mongod_initialization: true
     keyfile: "{{ lookup('file','/tmp/keyfile')}}"
-      
+
   pre_tasks:
     - block:
-      - name: set instance hostname
-        hostname:
-          name: "{{ hostname }}"
+        - name: set instance hostname
+          hostname:
+            name: "{{ hostname }}"
       become: yes
       become_method: sudo
       when: keyfile and temporary_master_password != ""
@@ -27,6 +27,8 @@
     - role: mongod-3.6
       mongodb_authorization_enabled: false
       when: tvlk_mongod_initialization == true
+    - role: datadog_agent
+      datadog_api_key: "{{ datadog_api_key }}"
     - role: awslogs-config
       awslogs_app_name: "{{service_name}}-mongod"
       awslogs_app_log_settings:

@@ -1,0 +1,12 @@
+- hosts: localhost
+  connection: local
+  vars:
+    tvlk_mongod_initialization: true
+    datadog_api_key: "{{ lookup('aws_ssm','/tvlk-secret/shared/<changethiswithyourpd>/datadog.api.key',region='ap-southeast-1',decrypt=True)}}"
+  roles:
+    - role: configure datadog
+      datadog_checks:
+        mongo:
+          init_config:
+          instances:
+            - server: "mongodb://{{ monitor_user }}:{{ monitor_password }}@localhost:27017"

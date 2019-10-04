@@ -4,6 +4,9 @@
   name: xfsvolume
 - src: https://github.com/traveloka/ansible-awslogs-config
   name: awslogs-config
-- src: https://github.com/SiahaanBernard/ansible-mongo-root-user
+- src: https://github.com/traveloka/ansible-mongodb-root-user
   name: mongo-root-user
-
+- src: https://github.com/traveloka/ansible-datadog-agent
+  name: datadog
+- src: https://github.com/traveloka/ansible-datadog-checks
+  name: datadog-checks
