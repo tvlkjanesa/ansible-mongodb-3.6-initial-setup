@@ -1,6 +1,7 @@
 ---
 # required variables:
-# service_name: <name of the service>, this will be used as replica set name
+# service_name: name of the service
+# replica_set_name: name of the replica set / mongodb cluster, if you are migrating from multi account you need to use the same replica_set_name
 # mongodb_repl_oplog_size: <size of the mongo oplog in MB>
 # pd_name: your product domain name
 # hostname: FQDN of mongodb instances
@@ -39,6 +40,6 @@
     - role: mongo-root-user
       login_password: "{{ temporary_master_password }}"
     - role: mongod-3.6
-      mongodb_repl_set_name: "{{ service_name }}"
+      mongodb_repl_set_name: "{{ replica_set_name }}"
       mongodb_keyfile_content: "{{ keyfile }}"
       when: tvlk_mongod_initialization == true
