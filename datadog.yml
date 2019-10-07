@@ -1,8 +1,12 @@
+---
+# Variable Description
+# monitor_user: is the username which is used by datadog to monitor mongodb related metrics
+# monitor_password: password for monitor_user
+
 - hosts: localhost
   connection: local
   vars:
     tvlk_mongod_initialization: true
-    datadog_api_key: "{{ lookup('aws_ssm','/tvlk-secret/shared/<changethiswithyourpd>/datadog.api.key',region='ap-southeast-1',decrypt=True)}}"
   roles:
     - role: configure datadog
       datadog_checks:

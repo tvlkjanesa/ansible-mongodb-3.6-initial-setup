@@ -7,13 +7,13 @@
 # hostname: FQDN of mongodb instances
 # temporary_master_password: temporary master password for initial root user
 # keyfile: keyfile for mongodb cluster, to generate key file you can run this command: openssl rand -base64 741
-
+# datadog_api_key: you need to change the path of parameter store where you store the datadog api key
 - hosts: localhost
   connection: local
   vars:
     tvlk_mongod_initialization: true
     keyfile: "{{ lookup('file','/tmp/keyfile')}}"
-
+    datadog_api_key: "{{ lookup('aws_ssm','/tvlk-secret/shared/<changethiswithyourpd>/datadog.api.key',region='ap-southeast-1',decrypt=True)}}"
   pre_tasks:
     - block:
         - name: set instance hostname
