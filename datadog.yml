@@ -8,7 +8,7 @@
   vars:
     tvlk_mongod_initialization: true
   roles:
-    - role: configure datadog
+    - role: datadog-checks
       datadog_checks:
         mongo:
           init_config:
