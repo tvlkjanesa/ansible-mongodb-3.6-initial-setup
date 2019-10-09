@@ -8,5 +8,5 @@
   name: mongo-root-user
 - src: https://github.com/traveloka/ansible-datadog-agent
   name: datadog
-- src: https://github.com/traveloka/ansible-datadog-checks
-  name: datadog-checks
+- src: https://github.com/traveloka/ansible-datadog-configure-mongo-custom
+  name: datadog-mongo-checks
