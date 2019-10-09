@@ -9,7 +9,7 @@
     tvlk_mongod_initialization: true
   roles:
     - role: datadog-mongo-checks
-      datadog_checks:
+      check_config:
         mongo:
           init_config:
           instances:
