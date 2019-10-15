@@ -10,7 +10,7 @@
   roles:
     - role: datadog-mongo-checks
       check_config:
-        mongo:
-          init_config:
-          instances:
-            - server: "mongodb://{{ monitor_user }}:{{ monitor_password }}@localhost:27017"
+        init_config:
+          min_collection_interval: 20
+        instances:
+          server: "mongodb://{{ monitor_user }}:{{ monitor_password }}@localhost:27017"
