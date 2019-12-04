@@ -1,13 +1,4 @@
 ---
-# required variables:
-# service_name: name of the service
-# replica_set_name: name of the replica set / mongodb cluster, if you are migrating from multi account you need to use the same replica_set_name
-# mongodb_repl_oplog_size: <size of the mongo oplog in MB>
-# pd_name: your product domain name
-# hostname: FQDN of mongodb instances
-# temporary_master_password: temporary master password for initial root user
-# keyfile: keyfile for mongodb cluster, to generate key file you can run this command: openssl rand -base64 741
-# datadog_api_key: you need to change the path of parameter store where you store the datadog api key
 - hosts: localhost
   connection: local
   vars:
