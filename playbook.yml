@@ -4,7 +4,7 @@
   vars:
     tvlk_mongod_initialization: true
     keyfile: "{{ lookup('file','/tmp/keyfile')}}"
-    datadog_api_key: "{{ lookup('aws_ssm','/tvlk-secret/shared/<changethiswithyourpd>/datadog.api.key',region='ap-southeast-1',decrypt=True)}}"
+    datadog_api_key_parameter_store: "{{ lookup('aws_ssm','/tvlk-secret/shared/<changethiswithyourpd>/datadog.api.key',region='ap-southeast-1',decrypt=True)}}"
   pre_tasks:
     - block:
         - name: set instance hostname
@@ -20,7 +20,7 @@
       mongodb_authorization_enabled: false
       when: tvlk_mongod_initialization == true
     - role: datadog-agent
-      datadog_api_key: "{{ datadog_api_key }}"
+      datadog_api_key: "{{ datadog_api_key_parameter_store }}"
     - role: awslogs-config
       awslogs_app_name: "{{service_name}}-mongod"
       awslogs_app_log_settings:
