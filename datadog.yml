@@ -13,4 +13,4 @@
         init_config:
           min_collection_interval: 20
         instances:
-          server: "mongodb://{{ monitor_user }}:{{ monitor_password }}@localhost:27017"
+          - server: "mongodb://{{ monitor_user }}:{{ monitor_password }}@localhost:27017"
