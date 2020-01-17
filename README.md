@@ -25,6 +25,9 @@ These variables are required to run this playbook.
     - name: replica_set_name
       description: name of the replica set / mongodb cluster, if you are migrating from multi account you need to use the same replica_set_name
       example: tsidatarepl
+    - name: volume_defice
+      description: name of the device volume to be mounted to store mongodb data
+      example: /deb/xvdb
     - name: mongodb_repl_oplog_size
       description: : size of the mongo oplog in MB
       example: 10000

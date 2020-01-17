@@ -15,6 +15,7 @@
       when: keyfile and temporary_master_password != ""
   roles:
     - role: xfsvolume
+      xfs_volume_device: "{{volume_device | default('/dev/xvdf'}}"
       xfs_volume_mount: /var/lib/mongodb
     - role: mongod-3.6
       mongodb_authorization_enabled: false
